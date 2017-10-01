@@ -22,10 +22,16 @@ int main (int argc, char** argv) {
     fgets(a, LINE_SIZE, stdin);
     int row = 0;
     //TODO:: FIND A WAY TO FIND THE RIGHT SIZE FOR BELOW
-    info* myinfo = malloc(10000*sizeof(info));
+	size_t arrlen = 500;
+    info* myinfo = malloc(arrlen*sizeof(info));
     //Each loop gets a new row
     for (;;)
     {
+		if (row >= arrlen)
+		{
+			arrlen = arrlen*2;
+			myinfo = (info*)realloc(myinfo, arrlen*sizeof(info));
+		}
         char b[LINE_SIZE];
         if (fgets(b, LINE_SIZE, stdin) == NULL)
             break;
@@ -71,11 +77,13 @@ int main (int argc, char** argv) {
                 case 0 :
                     if (entry[0] == ' ')
                     {
-                        for(int i = 0; i < index; i++)
+						int i = 0;
+                        while(i < index)
                         {
                             if (entry[i] == '\n' || entry[i] == '\0')
                                 break;
                             entry[i] = entry[i+1];
+							i++;
                         }
                     }   
                     myinfo[row].color = malloc(index*sizeof(char));
@@ -111,7 +119,9 @@ int main (int argc, char** argv) {
                     myinfo[row].actor_1_name = malloc(index*sizeof(char));
                     myinfo[row].actor_1_name = strdup(entry);
                 case 11 :
-                    if (index > 0)
+					if (row < 20)
+						printf("%d\n", index);
+                    if (index > 1)
                     {
                         if (entry[index - 1] == '\"')
                         {
@@ -180,10 +190,15 @@ int main (int argc, char** argv) {
         row++;
     }
 
-    char* type = "gross";
+    char* type = "movie_title";
     mergeSortMain(type, myinfo, 0, row-1);
-    for (int i =0; i < 5000; i++)
-        printf("%s\n", myinfo[i].gross);
+    //prints to a new file
+    FILE *sorted;
+    sorted = fopen("sorted_movie_dataset.csv", "w");
+    fprintf(sorted, "%s", a);
+    for (int i = 0; i < row; i++) {
+        fprintf(sorted, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",myinfo[i].color, myinfo[i].director_name, myinfo[i].num_critic_for_reviews, myinfo[i].duration, myinfo[i].director_facebook_likes, myinfo[i].actor_3_facebook_likes, myinfo[i].actor_2_name, myinfo[i].actor_1_facebook_likes, myinfo[i].gross, myinfo[i].genres, myinfo[i].actor_1_name, myinfo[i].movie_title, myinfo[i].num_voted_users, myinfo[i].cast_total_facebook_likes, myinfo[i].actor_3_name, myinfo[i].facenumber_in_poster, myinfo[i].plot_keywords, myinfo[i].movie_imdb_link, myinfo[i].num_user_for_reviews, myinfo[i].language, myinfo[i].country, myinfo[i].content_rating, myinfo[i].budget, myinfo[i].title_year, myinfo[i].actor_2_facebook_likes, myinfo[i].imdb_score, myinfo[i].aspect_ratio, myinfo[i].movie_facebook_likes);
+    }
     free(myinfo);
     return 0;
 }
