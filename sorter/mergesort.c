@@ -4,8 +4,96 @@
 #include "sorter.h"
 
 //the part of merge sort where you break down the main array
-info mergeSortHelper (char * type,info *array, int first, int middle, int end) {
+void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     
+    int typeInt = -1;
+    //associates type with a number
+    if (strcmp(type, "color") == 0) {
+    	typeInt = 0;
+    }
+    else if (strcmp(type, "director_name") == 0) {
+    	typeInt = 1;
+    }
+    else if (strcmp(type, "num_critic_for_reviews") == 0) {
+    	typeInt = 2;
+    }
+    else if (strcmp(type, "duration") == 0) {
+    	typeInt = 3;
+    }
+    else if (strcmp(type, "director_facebook_likes") == 0) {
+    	typeInt = 4;
+    }
+    else if (strcmp(type, "actor_3_facebook_likes") == 0) {
+    	typeInt = 5;
+    }
+    else if (strcmp(type, "actor_2_name") == 0) {
+    	typeInt = 6;
+    }
+    else if (strcmp(type, "actor_1_facebook_likes") == 0) {
+    	typeInt = 7;
+    }
+    else if (strcmp(type, "gross") == 0) {
+    	typeInt = 8;
+    }
+    else if (strcmp(type, "genres") == 0) {
+    	typeInt = 9;
+    }
+    else if (strcmp(type, "actor_1_name") == 0) {
+    	typeInt = 10;
+    }
+    else if (strcmp(type, "movie_title") == 0) {
+    	typeInt = 11;
+    }
+    else if (strcmp(type, "num_voted_users") == 0) {
+    	typeInt = 12;
+    }
+    else if (strcmp(type, "cast_total_facebook_likes") == 0) {
+    	typeInt = 13;
+    }
+    else if (strcmp(type, "actor_3_name") == 0) {
+    	typeInt = 14;
+    }
+    else if (strcmp(type, "facenumber_in_poster") == 0) {
+    	typeInt = 15;
+    }
+    else if (strcmp(type, "plot_keywords") == 0) {
+    	typeInt = 16;
+    }
+    else if (strcmp(type, "movie_imdb_link") == 0) {
+    	typeInt = 17;
+    }
+    else if (strcmp(type, "num_user_for_reviews") == 0) {
+    	typeInt = 18;
+    }
+    else if (strcmp(type, "language") == 0) {
+    	typeInt = 19;
+    }
+    else if (strcmp(type, "country") == 0) {
+    	typeInt = 20;
+    }
+    else if (strcmp(type, "content_rating") == 0) {
+    	typeInt = 21;
+    }
+    else if (strcmp(type, "budget") == 0) {
+    	typeInt = 22;
+    }
+    else if (strcmp(type, "title_year") == 0) {
+    	typeInt = 23;
+    }
+    else if (strcmp(type, "actor_2_facebook_likes") == 0) {
+    	typeInt = 24;
+    }
+    else if (strcmp(type, "imdb_score") == 0) {
+    	typeInt = 25;
+    }
+    else if (strcmp(type, "aspect_ratio") == 0) {
+    	typeInt = 26;
+    }
+    else if (strcmp(type, "movie_facebook_likes") == 0) {
+    	typeInt = 27;
+    }
+
+
     //these are the length of the split arrays
     int len1 = middle;
     int len2 = end - middle;
@@ -29,365 +117,366 @@ info mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     int z = 1;
 
     //breaks down the sorting part case by case
-    switch(type) {
-        case 'color':
+
+    switch(typeInt) {
+        case 0:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->color, arr2[y]->color) <= 0) {
+                if (strcmp(arr1[x].color, arr2[y].color) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->color, arr2[y]->color) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'director_name':
+        case 1:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->director_name, arr2[y]->director_name) <= 0) {
+                if (strcmp(arr1[x].director_name, arr2[y].director_name) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->director_name, arr2[y]->director_name) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'num_critic_for_reviews':
+        case 2:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->num_critic_for_reviews, arr2[y]->num_critic_for_reviews) <= 0) {
+                if (strcmp(arr1[x].num_critic_for_reviews, arr2[y].num_critic_for_reviews) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->num_critic_for_reviews, arr2[y]->num_critic_for_reviews) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'duration':
+        case 3:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->duration, arr2[y]->duration) <= 0) {
+                if (strcmp(arr1[x].duration, arr2[y].duration) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->duration, arr2[y]->duration) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'director_facebook_likes':
+        case 4:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->director_facebook_likes, arr2[y]->director_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].director_facebook_likes, arr2[y].director_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->director_facebook_likes, arr2[y]->director_facebook_likes) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_3_facebook_likes':
+        case 5:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_3_facebook_likes, arr2[y]->actor_3_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].actor_3_facebook_likes, arr2[y].actor_3_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_3_facebook_likes, arr2[y]->actor_3_facebook_likes) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_2_name':
+        case 6:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_2_name, arr2[y]->actor_2_name) <= 0) {
+                if (strcmp(arr1[x].actor_2_name, arr2[y].actor_2_name) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_2_name, arr2[y]->actor_2_name) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_1_facebook_likes':
+        case 7:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_1_facebook_likes, arr2[y]->actor_1_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].actor_1_facebook_likes, arr2[y].actor_1_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_1_facebook_likes, arr2[y]->actor_1_facebook_likes) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'gross':
+        case 8:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->gross, arr2[y]->gross) <= 0) {
+                if (strcmp(arr1[x].gross, arr2[y].gross) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->gross, arr2[y]->gross) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'genres':
+        case 9:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->genres, arr2[y]->genres) <= 0) {
+                if (strcmp(arr1[x].genres, arr2[y].genres) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->genres, arr2[y]->genres) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_1_name':
+        case 10:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_1_name, arr2[y]->actor_1_name) <= 0) {
+                if (strcmp(arr1[x].actor_1_name, arr2[y].actor_1_name) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_1_name, arr2[y]->actor_1_name) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'movie_title':
+        case 11:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->movie_title, arr2[y]->movie_title) <= 0) {
+                if (strcmp(arr1[x].movie_title, arr2[y].movie_title) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->movie_title, arr2[y]->movie_title) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'num_voted_users':
+        case 12:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->num_voted_users, arr2[y]->num_voted_users) <= 0) {
+                if (strcmp(arr1[x].num_voted_users, arr2[y].num_voted_users) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->num_voted_users, arr2[y]->num_voted_users) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'cast_total_facebook_likes':
+        case 13:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->cast_total_facebook_likes, arr2[y]->cast_total_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].cast_total_facebook_likes, arr2[y].cast_total_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->cast_total_facebook_likes, arr2[y]->cast_total_facebook_likes) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_3_name':
+        case 14:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_3_name, arr2[y]->actor_3_name) <= 0) {
+                if (strcmp(arr1[x].actor_3_name, arr2[y].actor_3_name) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_3_name, arr2[y]->actor_3_name) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'facenumber_in_poster':
+        case 15:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->facenumber_in_poster, arr2[y]->facenumber_in_poster) <= 0) {
+                if (strcmp(arr1[x].facenumber_in_poster, arr2[y].facenumber_in_poster) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->facenumber_in_poster, arr2[y]->facenumber_in_poster) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'plot_keywords':
+        case 16:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->plot_keywords, arr2[y]->plot_keywords) <= 0) {
+                if (strcmp(arr1[x].plot_keywords, arr2[y].plot_keywords) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->plot_keywords, arr2[y]->plot_keywords) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'movie_imdb_link':
+        case 17:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->movie_imdb_link, arr2[y]->movie_imdb_link) <= 0) {
+                if (strcmp(arr1[x].movie_imdb_link, arr2[y].movie_imdb_link) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->movie_imdb_link, arr2[y]->movie_imdb_link) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'num_user_for_reviews':
+        case 18:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->num_user_for_reviews, arr2[y]->num_user_for_reviews) <= 0) {
+                if (strcmp(arr1[x].num_user_for_reviews, arr2[y].num_user_for_reviews) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->num_user_for_reviews, arr2[y]->num_user_for_reviews) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'language':
+        case 19:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->language, arr2[y]->language) <= 0) {
+                if (strcmp(arr1[x].language, arr2[y].language) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->language, arr2[y]->language) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'country':
+        case 20:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->country, arr2[y]->country) <= 0) {
+                if (strcmp(arr1[x].country, arr2[y].country) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->country, arr2[y]->country) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'content_rating':
+        case 21:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->content_rating, arr2[y]->content_rating) <= 0) {
+                if (strcmp(arr1[x].content_rating, arr2[y].content_rating) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->content_rating, arr2[y]->content_rating) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'budget':
+        case 22:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->budget, arr2[y]->budget) <= 0) {
+                if (strcmp(arr1[x].budget, arr2[y].budget) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->budget, arr2[y]->budget) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'title_year':
+        case 23:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->title_year, arr2[y]->title_year) <= 0) {
+                if (strcmp(arr1[x].title_year, arr2[y].title_year) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->title_year, arr2[y]->title_year) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'actor_2_facebook_likes':
+        case 24:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->actor_2_facebook_likes, arr2[y]->actor_2_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].actor_2_facebook_likes, arr2[y].actor_2_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->actor_2_facebook_likes, arr2[y]->actor_2_facebook_likes) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'imdb_score':
+        case 25:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->imdb_score, arr2[y]->imdb_score) <= 0) {
+                if (strcmp(arr1[x].imdb_score, arr2[y].imdb_score) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->imdb_score, arr2[y]->imdb_score) > 0) {
+                else {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'aspect_ratio':
+        case 26:
            while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->aspect_ratio, arr2[y]->aspect_ratio) <= 0) {
+                if (strcmp(arr1[x].aspect_ratio, arr2[y].aspect_ratio) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->aspect_ratio, arr2[y]->aspect_ratio) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
                 z++;
             }
             break;
-        case 'movie_facebook_likes':
+        case 27:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x]->movie_facebook_likes, arr2[y]->movie_facebook_likes) <= 0) {
+                if (strcmp(arr1[x].movie_facebook_likes, arr2[y].movie_facebook_likes) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
-                else (strcmp(arr1[x]->movie_facebook_likes, arr2[y]->movie_facebook_likes) > 0) {
+                else  {
                     array[z] = arr2[y];
                     y++;
                 }
@@ -409,8 +498,8 @@ info mergeSortHelper (char * type,info *array, int first, int middle, int end) {
         y++;
     }
 
-    free[arr1];
-    free[arr2];
+    free(arr1);
+    free(arr2);
 }
 
 //USE THIS TO ACTUALLY USE MERGE SORT@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -418,16 +507,16 @@ info mergeSortHelper (char * type,info *array, int first, int middle, int end) {
 //mergeSortMain (type, array, 0, arraySize - 1);
 void mergeSortMain(char* type, info * array, int first, int end) {
     if (first < end) {
-        int middle = r/2;
+        int middle = end/2;
         //split the array
         mergeSortMain(type, array, first, middle);
         mergeSortMain(type, array, middle+1, end);
 
         //merge
-        merge(type, array, first, middle, end);
+        mergeSortHelper(type, array, first, middle, end);
     }
 }
 
-int main (int argc; char** argv) {
+int main (int argc, char** argv) {
     return 0;
 }
