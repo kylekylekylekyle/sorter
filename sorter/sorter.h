@@ -1,3 +1,6 @@
+#ifndef SORTER_H__
+#define SORTER_H__
+
 typedef struct info {
 	char * color;
 	char * director_name;
@@ -28,3 +31,9 @@ typedef struct info {
 	char * aspect_ratio;
 	char * movie_facebook_likes;
 } info;
+
+void mergeSortHelper (char * type,info *array, int first, int middle, int end);
+
+void mergeSortMain(char* type, info * array, int first, int end);
+
+#endif
