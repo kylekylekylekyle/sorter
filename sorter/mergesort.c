@@ -95,7 +95,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
 
 
     //these are the length of the split arrays
-    int len1 = middle;
+    int len1 = middle - first +1;
     int len2 = end - middle;
 
     //merge sort breaks the initial array down so these are temp arrays
@@ -114,7 +114,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     //index of arr1, arr2, and the original array
     int x = 0;
     int y = 0;
-    int z = 1;
+    int z = first;
 
     //breaks down the sorting part case by case
 
@@ -507,7 +507,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
 //mergeSortMain (type, array, 0, arraySize - 1);
 void mergeSortMain(char* type, info * array, int first, int end) {
     if (first < end) {
-        int middle = end/2;
+        int middle = first + (end-first)/2;
         //split the array
         mergeSortMain(type, array, first, middle);
         mergeSortMain(type, array, middle+1, end);
@@ -515,8 +515,4 @@ void mergeSortMain(char* type, info * array, int first, int end) {
         //merge
         mergeSortHelper(type, array, first, middle, end);
     }
-}
-
-int main (int argc, char** argv) {
-    return 0;
 }
