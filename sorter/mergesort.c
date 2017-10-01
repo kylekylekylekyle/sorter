@@ -97,18 +97,17 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     //these are the length of the split arrays
     int len1 = middle - first +1;
     int len2 = end - middle;
+    
 
     //merge sort breaks the initial array down so these are temp arrays
-    info* arr1;
-    arr1 = (info*)malloc(len1 * sizeof(info));
+    info arr1[len1];
     for (int i =0; i<len1; i++) {
         arr1[i] = array[i+first];
     }
 
-    info* arr2;
-    arr2 = (info*)malloc(len2 * sizeof(info));
+    info arr2[len2];
     for (int j =0; j<len2; j++) {
-        arr2[j] = array[j + middle +first];
+        arr2[j] = array[j + middle];
     }
 
     //index of arr1, arr2, and the original array
@@ -497,9 +496,6 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
         z++;
         y++;
     }
-
-    free(arr1);
-    free(arr2);
 }
 
 //USE THIS TO ACTUALLY USE MERGE SORT@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
