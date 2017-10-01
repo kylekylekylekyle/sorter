@@ -17,12 +17,14 @@ int main (int argc, char** argv) {
         return 0;
     }
 
+	size_t linesize = 40;
+
     //Get first row with column headers
     char a[LINE_SIZE];
     fgets(a, LINE_SIZE, stdin);
     int row = 0;
     //TODO:: FIND A WAY TO FIND THE RIGHT SIZE FOR BELOW
-	size_t arrlen = 500;
+	size_t arrlen = 200;
     info* myinfo = malloc(arrlen*sizeof(info));
     //Each loop gets a new row
     for (;;)
@@ -43,13 +45,18 @@ int main (int argc, char** argv) {
         {
             if (done == 1)
                 break;
-            int entrysize = 128;
-            char entry[entrysize];
+            size_t entrysize = 8;
+            char* entry = malloc(entrysize*sizeof(char));
             int index = 0;
             //Each loop gets a new letter
             int quotes = 0;
             for (;;)
             {
+				if (index >= entrysize)
+				{
+					entrysize = 2*entrysize;
+					entry = realloc(entry, entrysize*sizeof(char));
+				}
                 if (b[letter] == '\"')
                 {
                     if (quotes == 0)
@@ -119,8 +126,6 @@ int main (int argc, char** argv) {
                     myinfo[row].actor_1_name = malloc(index*sizeof(char));
                     myinfo[row].actor_1_name = strdup(entry);
                 case 11 :
-					if (row < 20)
-						printf("%d\n", index);
                     if (index > 1)
                     {
                         if (entry[index - 1] == '\"')
@@ -185,12 +190,13 @@ int main (int argc, char** argv) {
                     myinfo[row].movie_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].movie_facebook_likes = strdup(entry);
             }
+			free(entry);
             entryindex++;
         }
         row++;
     }
 
-    char* type = "movie_title";
+    char* type = argv[2];
     mergeSortMain(type, myinfo, 0, row-1);
     //prints to a new file
     FILE *sorted;
