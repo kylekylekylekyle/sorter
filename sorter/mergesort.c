@@ -4,8 +4,7 @@
 #include "sorter.h"
 
 //the part of merge sort where you break down the main array
-void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
-    
+void mergeSortHelper (char * type,info  * array, int first, int middle, int end) {
     int typeInt = -1;
     //associates type with a number
     if (strcmp(type, "color") == 0) {
@@ -95,7 +94,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
 
 
     //these are the length of the split arrays
-    int len1 = middle - first +1;
+    int len1 = middle - first + 1;
     int len2 = end - middle;
     
 
@@ -106,8 +105,8 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     }
 
     info arr2[len2];
-    for (int j =0; j<len2; j++) {
-        arr2[j] = array[j + middle];
+    for (int j =0; j<len2; j++) {   
+        arr2[j] = array[j + middle + 1];
     }
 
     //index of arr1, arr2, and the original array
@@ -116,7 +115,6 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
     int z = first;
 
     //breaks down the sorting part case by case
-
     switch(typeInt) {
         case 0:
             while (x < len1 && y < len2) {
@@ -146,7 +144,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 2:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].num_critic_for_reviews, arr2[y].num_critic_for_reviews) <= 0) {
+                if (atoi(arr1[x].num_critic_for_reviews) <= atoi(arr2[y].num_critic_for_reviews)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -159,7 +157,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 3:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].duration, arr2[y].duration) <= 0) {
+                if (atoi(arr1[x].duration) <= atoi(arr2[y].duration)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -172,7 +170,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 4:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].director_facebook_likes, arr2[y].director_facebook_likes) <= 0) {
+                if (atoi(arr1[x].director_facebook_likes) <= atoi(arr2[y].director_facebook_likes)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -185,8 +183,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 5:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].actor_3_facebook_likes, arr2[y].actor_3_facebook_likes) <= 0) {
-                    array[z] = arr1[x];
+                if (atoi(arr1[x].actor_3_facebook_likes) <= atoi(arr2[y].actor_3_facebook_likes)) {                    array[z] = arr1[x];
                     x++;
                 }
                 else {
@@ -211,7 +208,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 7:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].actor_1_facebook_likes, arr2[y].actor_1_facebook_likes) <= 0) {
+                if (atoi(arr1[x].actor_1_facebook_likes) <= atoi(arr2[y].actor_1_facebook_likes)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -224,7 +221,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 8:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].gross, arr2[y].gross) <= 0) {
+                if (atoi(arr1[x].gross) <= atoi(arr2[y].gross)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -276,7 +273,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 12:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].num_voted_users, arr2[y].num_voted_users) <= 0) {
+                if (atoi(arr1[x].num_voted_users) <= atoi(arr2[y].num_voted_users)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -289,7 +286,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 13:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].cast_total_facebook_likes, arr2[y].cast_total_facebook_likes) <= 0) {
+                if (atoi(arr1[x].cast_total_facebook_likes) <= atoi(arr2[y].cast_total_facebook_likes)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -315,7 +312,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 15:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].facenumber_in_poster, arr2[y].facenumber_in_poster) <= 0) {
+                if (atoi(arr1[x].facenumber_in_poster) <= atoi(arr2[y].facenumber_in_poster)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -354,7 +351,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 18:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].num_user_for_reviews, arr2[y].num_user_for_reviews) <= 0) {
+                if (atoi(arr1[x].num_user_for_reviews) <= atoi(arr2[y].num_user_for_reviews)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -406,7 +403,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 22:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].budget, arr2[y].budget) <= 0) {
+                if (atoi(arr1[x].budget) <= atoi(arr2[y].budget)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -419,7 +416,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 23:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].title_year, arr2[y].title_year) <= 0) {
+                if (atoi(arr1[x].title_year) <= atoi(arr2[y].title_year)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -432,7 +429,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 24:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].actor_2_facebook_likes, arr2[y].actor_2_facebook_likes) <= 0) {
+                if (atoi(arr1[x].actor_2_facebook_likes) <= atoi(arr2[y].actor_2_facebook_likes)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -445,7 +442,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 25:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].imdb_score, arr2[y].imdb_score) <= 0) {
+                if (atof(arr1[x].imdb_score) <= atoi(arr2[y].imdb_score)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -458,7 +455,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 26:
            while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].aspect_ratio, arr2[y].aspect_ratio) <= 0) {
+                if (atof(arr1[x].aspect_ratio) <= atoi(arr2[y].aspect_ratio)) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -471,8 +468,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
             break;
         case 27:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].movie_facebook_likes, arr2[y].movie_facebook_likes) <= 0) {
-                    array[z] = arr1[x];
+                if (atoi(arr1[x].movie_facebook_likes) <= atoi(arr2[y].movie_facebook_likes)) {                    array[z] = arr1[x];
                     x++;
                 }
                 else  {
@@ -496,6 +492,7 @@ void mergeSortHelper (char * type,info *array, int first, int middle, int end) {
         z++;
         y++;
     }
+
 }
 
 //USE THIS TO ACTUALLY USE MERGE SORT@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
