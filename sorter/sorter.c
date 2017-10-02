@@ -93,37 +93,37 @@ int main (int argc, char** argv) {
 							i++;
                         }
                     }   
-                    myinfo[row].color = malloc(index*sizeof(char));
+                    //myinfo[row].color = malloc(index*sizeof(char));
                     myinfo[row].color = strdup(entry);
                 case 1 :
-                    myinfo[row].director_name = malloc(index*sizeof(char));
+                    //myinfo[row].director_name = malloc(index*sizeof(char));
                     myinfo[row].director_name = strdup(entry);
                 case 2 :
-                    myinfo[row].num_critic_for_reviews = malloc(index*sizeof(char));
+                    //myinfo[row].num_critic_for_reviews = malloc(index*sizeof(char));
                     myinfo[row].num_critic_for_reviews = strdup(entry);
                 case 3 :
-                    myinfo[row].duration = malloc(index*sizeof(char));
+                    //myinfo[row].duration = malloc(index*sizeof(char));
                     myinfo[row].duration = strdup(entry);
                 case 4 :
-                    myinfo[row].director_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].director_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].director_facebook_likes = strdup(entry);
                 case 5 :
-                    myinfo[row].actor_3_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].actor_3_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].actor_3_facebook_likes = strdup(entry);
                 case 6 :
-                    myinfo[row].actor_2_name = malloc(index*sizeof(char));
+                    //myinfo[row].actor_2_name = malloc(index*sizeof(char));
                     myinfo[row].actor_2_name = strdup(entry);
                 case 7 :
-                    myinfo[row].actor_1_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].actor_1_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].actor_1_facebook_likes = strdup(entry);
                 case 8 :
-                    myinfo[row].gross = malloc(index*sizeof(char));
+                    //myinfo[row].gross = malloc(index*sizeof(char));
                     myinfo[row].gross = strdup(entry);
                 case 9 :
-                    myinfo[row].genres = malloc(index*sizeof(char));
+                    //myinfo[row].genres = malloc(index*sizeof(char));
                     myinfo[row].genres = strdup(entry);
                 case 10 :
-                    myinfo[row].actor_1_name = malloc(index*sizeof(char));
+                    //myinfo[row].actor_1_name = malloc(index*sizeof(char));
                     myinfo[row].actor_1_name = strdup(entry);
                 case 11 :
                     if (index > 1)
@@ -139,58 +139,58 @@ int main (int argc, char** argv) {
                                 entry[index - 2] = '\0';
                         }
                     }
-                    myinfo[row].movie_title = malloc(index*sizeof(char));
+                    //myinfo[row].movie_title = malloc(index*sizeof(char));
                     myinfo[row].movie_title = strdup(entry);
                 case 12 :
-                    myinfo[row].num_voted_users = malloc(index*sizeof(char));
+                    //myinfo[row].num_voted_users = malloc(index*sizeof(char));
                     myinfo[row].num_voted_users = strdup(entry);
                 case 13 :
-                    myinfo[row].cast_total_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].cast_total_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].cast_total_facebook_likes = strdup(entry);
                 case 14 :
-                    myinfo[row].actor_3_name = malloc(index*sizeof(char));
+                    //myinfo[row].actor_3_name = malloc(index*sizeof(char));
                     myinfo[row].actor_3_name = strdup(entry);
                 case 15 :
-                    myinfo[row].facenumber_in_poster = malloc(index*sizeof(char));
+                    //myinfo[row].facenumber_in_poster = malloc(index*sizeof(char));
                     myinfo[row].facenumber_in_poster = strdup(entry);
                 case 16 :
-                    myinfo[row].plot_keywords = malloc(index*sizeof(char));
+                    //myinfo[row].plot_keywords = malloc(index*sizeof(char));
                     myinfo[row].plot_keywords = strdup(entry);
                 case 17 :
-                    myinfo[row].movie_imdb_link = malloc(index*sizeof(char));
+                    //myinfo[row].movie_imdb_link = malloc(index*sizeof(char));
                     myinfo[row].movie_imdb_link = strdup(entry);
                 case 18 :
-                    myinfo[row].num_user_for_reviews = malloc(index*sizeof(char));
+                    //myinfo[row].num_user_for_reviews = malloc(index*sizeof(char));
                     myinfo[row].num_user_for_reviews = strdup(entry);
                 case 19 :
-                    myinfo[row].language = malloc(index*sizeof(char));
+                    //myinfo[row].language = malloc(index*sizeof(char));
                     myinfo[row].language = strdup(entry);
                 case 20 :
-                    myinfo[row].country = malloc(index*sizeof(char));
+                    //myinfo[row].country = malloc(index*sizeof(char));
                     myinfo[row].country = strdup(entry);
                 case 21 :
-                    myinfo[row].content_rating = malloc(index*sizeof(char));
+                    //myinfo[row].content_rating = malloc(index*sizeof(char));
                     myinfo[row].content_rating = strdup(entry);
                 case 22 :
-                    myinfo[row].budget = malloc(index*sizeof(char));
+                    //myinfo[row].budget = malloc(index*sizeof(char));
                     myinfo[row].budget = strdup(entry);
                 case 23 :
-                    myinfo[row].title_year = malloc(index*sizeof(char));
+                    //myinfo[row].title_year = malloc(index*sizeof(char));
                     myinfo[row].title_year = strdup(entry);
                 case 24 :
-                    myinfo[row].actor_2_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].actor_2_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].actor_2_facebook_likes = strdup(entry);
                 case 25 :
-                    myinfo[row].imdb_score = malloc(index*sizeof(char));
+                    //myinfo[row].imdb_score = malloc(index*sizeof(char));
                     myinfo[row].imdb_score = strdup(entry);
                 case 26 :
-                    myinfo[row].aspect_ratio = malloc(index*sizeof(char));
+                    //myinfo[row].aspect_ratio = malloc(index*sizeof(char));
                     myinfo[row].aspect_ratio = strdup(entry);
                 case 27 :
-                    myinfo[row].movie_facebook_likes = malloc(index*sizeof(char));
+                    //myinfo[row].movie_facebook_likes = malloc(index*sizeof(char));
                     myinfo[row].movie_facebook_likes = strdup(entry);
             }
-			free(entry);
+		
             entryindex++;
         }
         row++;
