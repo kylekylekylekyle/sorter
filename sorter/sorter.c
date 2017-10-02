@@ -199,13 +199,9 @@ int main (int argc, char** argv) {
 
     char* type = argv[2];
     mergeSortMain(type, myinfo, 0, row-1);
-    //prints to a new file
-    FILE *sorted;
-    sorted = fopen("sorted_movie_dataset.csv", "w");
-    fprintf(sorted, "%s", a);
+    printf("%s", a);
     for (int i = 0; i < row; i++) {
-        //printf("%s\n", myinfo[i].director_name);
-        fprintf(sorted, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",myinfo[i].color, myinfo[i].director_name, myinfo[i].num_critic_for_reviews, myinfo[i].duration, myinfo[i].director_facebook_likes, myinfo[i].actor_3_facebook_likes, myinfo[i].actor_2_name, myinfo[i].actor_1_facebook_likes, myinfo[i].gross, myinfo[i].genres, myinfo[i].actor_1_name, myinfo[i].movie_title, myinfo[i].num_voted_users, myinfo[i].cast_total_facebook_likes, myinfo[i].actor_3_name, myinfo[i].facenumber_in_poster, myinfo[i].plot_keywords, myinfo[i].movie_imdb_link, myinfo[i].num_user_for_reviews, myinfo[i].language, myinfo[i].country, myinfo[i].content_rating, myinfo[i].budget, myinfo[i].title_year, myinfo[i].actor_2_facebook_likes, myinfo[i].imdb_score, myinfo[i].aspect_ratio, myinfo[i].movie_facebook_likes);
+        printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",myinfo[i].color, myinfo[i].director_name, myinfo[i].num_critic_for_reviews, myinfo[i].duration, myinfo[i].director_facebook_likes, myinfo[i].actor_3_facebook_likes, myinfo[i].actor_2_name, myinfo[i].actor_1_facebook_likes, myinfo[i].gross, myinfo[i].genres, myinfo[i].actor_1_name, myinfo[i].movie_title, myinfo[i].num_voted_users, myinfo[i].cast_total_facebook_likes, myinfo[i].actor_3_name, myinfo[i].facenumber_in_poster, myinfo[i].plot_keywords, myinfo[i].movie_imdb_link, myinfo[i].num_user_for_reviews, myinfo[i].language, myinfo[i].country, myinfo[i].content_rating, myinfo[i].budget, myinfo[i].title_year, myinfo[i].actor_2_facebook_likes, myinfo[i].imdb_score, myinfo[i].aspect_ratio, myinfo[i].movie_facebook_likes);
     }
     free(myinfo);
     return 0;
