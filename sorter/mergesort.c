@@ -260,7 +260,37 @@ void mergeSortHelper (char * type,info  * array, int first, int middle, int end)
             break;
         case 11:
             while (x < len1 && y < len2) {
-                if (strcmp(arr1[x].movie_title, arr2[y].movie_title) <= 0) {
+                int mov_len1 = strlen(arr1[x].movie_title);
+                int mov_len2 = strlen(arr2[y].movie_title);
+
+                char * mov_tit1;
+                char * mov_tit2;
+
+                if (arr1[x].movie_title[0] == '\"') {
+                    mov_tit1 = (char*) malloc(mov_len1 * sizeof(char));
+                    
+                    for (int f = 1; f <= mov_len1; f++) {
+                        mov_tit1[f-1] = arr1[x].movie_title[f];
+                    }
+                }
+                else {
+                    mov_tit1 = (char*) malloc((mov_len1+1) * sizeof(char));
+                    strcpy(mov_tit1, arr1[x].movie_title);
+                }
+                if (arr2[y].movie_title[0] == '\"') {
+                    mov_tit2 = (char*) malloc(mov_len2 * sizeof(char));
+                    
+                    for (int g = 1; g <= mov_len2; g++) {
+                        mov_tit2[g-1] = arr2[y].movie_title[g];
+                    }
+                }
+                else {
+                    mov_tit2 = (char*) malloc((mov_len2+1) * sizeof(char));
+                    strcpy(mov_tit2, arr2[y].movie_title);
+                }
+
+                //comparison
+                if (strcmp(mov_tit1, mov_tit2) <= 0) {
                     array[z] = arr1[x];
                     x++;
                 }
@@ -269,6 +299,8 @@ void mergeSortHelper (char * type,info  * array, int first, int middle, int end)
                     y++;
                 }
                 z++;
+                free(mov_tit1);
+                free(mov_tit2);
             }
             break;
         case 12:
