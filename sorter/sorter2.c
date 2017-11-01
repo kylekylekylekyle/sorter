@@ -1,14 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "sorter.h"
 #include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "sorter.h"
 
 #define LINE_SIZE 1024
+
+int status;
 
 int isCSV(const char* name) {//0 not csv 1 csv
 	int length = strlen(name);
@@ -42,7 +44,6 @@ int notSorted(const char* name, char * type) {//0 sorted 1 not sorted
 		char sorted[9] = "-sorted-";
 		for (int i = 0; i < 8; i++) {
 			if (sorted[i] != name[length - 12 + i - length2]) {
-				printf("Compare: %c\n%c\n", sorted[i], name[length - 12 + i - length2]);
 				return 1;
 			}
 		}
@@ -60,7 +61,6 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
         		pid = fork();
         		counter++;
         		if (pid == 0) {
-        			printf("sorting %d at %s\n", pid, name);
         			FILE *unsorted;
 					unsorted = fopen(name, "r");
 					size_t linesize = 40;
@@ -306,7 +306,9 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
         			return;
         		}
         		if (pid > 0) {
+        			fflush(0);
         			printf("%d,", pid);
+        			fflush(0);
         		}		
         	}
         	else {
@@ -332,7 +334,9 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
 	            return;
 	        }
 	        if (pid > 0) {
-	        	
+	        	fflush(0);
+	        	printf("%d,", pid);
+	        	fflush(0);
 	        }	
         }
 	}
@@ -343,6 +347,78 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
 }
 
 int main (int argc, char** argv) {
-	recurse("/Users/kyleshin/Desktop/sorter/testdirect", "movie_title", "/Users/kyleshin/Desktop/sorter/", "a");
+	char * pathName;
+	char * name;
+	char * type;
+	if (argc < 3) {
+		return -1;
+	}
+	else {
+		if (argc == 3 || argc == 5 || argc == 7) {
+			if (argc == 3) {
+
+				if (strcmp(argv[1], "-c") != 0) {
+					return -1;
+				}
+				else {
+					type = argv[2];
+					pathName = "";
+					name = getcwd(0,0);
+				}
+			}
+			else if (argc == 5) {
+				if (strcmp(argv[1], "-c") != 0) {
+					return -1;
+				}
+				else {
+					type = argv[2];
+					if (strcmp(argv[3], "-d") == 0) {
+						name = argv[4];
+						pathName = "";
+					}
+					else if (strcmp(argv[3], "-o") == 0) {
+						pathName = argv[4];
+						name = getcwd(0,0); 
+					}
+					else {
+						return -1;
+					}
+				}
+			}
+			else {
+				if (strcmp(argv[1], "-c") != 0) {
+					return -1;
+				}
+				else {
+					type = argv[2];
+					if (strcmp(argv[3], "-d") == 0) {
+						name = argv[4];
+						if (strcmp(argv[5], "-o") == 0) {
+							pathName = argv[6];
+						}
+						else {
+							return -1;
+						}
+					}
+					else {
+						return -1;
+					}
+				}
+			}
+		}
+		else {
+			return -1;
+		}
+	}
+	fflush(0);
+	printf("%s\n", pathName);
+	fflush(0);
+	//printf("Initial PID: %d\n", getPid());
+	fflush(0);
+	printf("PIDs of all child processes: ");
+	fflush(0);
+	recurse(name, type, pathName, "a");
+	//recurse("/Users/kyleshin/Desktop/sorter/testdirect", "movie_title", "/Users/kyleshin/Desktop/sorter/", "a");
+	fflush(0);
 	return 0;
 }
