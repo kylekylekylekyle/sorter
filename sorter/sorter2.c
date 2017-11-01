@@ -42,6 +42,7 @@ int notSorted(const char* name, char * type) {//0 sorted 1 not sorted
 		char sorted[9] = "-sorted-";
 		for (int i = 0; i < 8; i++) {
 			if (sorted[i] != name[length - 12 + i - length2]) {
+				printf("Compare: %c\n%c\n", sorted[i], name[length - 12 + i - length2]);
 				return 1;
 			}
 		}
@@ -49,7 +50,7 @@ int notSorted(const char* name, char * type) {//0 sorted 1 not sorted
 	}
 }
 
-void recurse (const char* name, char* type) {
+void recurse (const char* name, char* type, char* pathName, char* fileName) {
 	int counter = 0;
 	pid_t pid;
 	DIR * dir;
@@ -59,8 +60,7 @@ void recurse (const char* name, char* type) {
         		pid = fork();
         		counter++;
         		if (pid == 0) {
-        			printf("%s %d\n", name, pid);
-
+        			printf("sorting %d at %s\n", pid, name);
         			FILE *unsorted;
 					unsorted = fopen(name, "r");
 					size_t linesize = 40;
@@ -245,27 +245,52 @@ void recurse (const char* name, char* type) {
 				    mergeSortMain(type, myinfo, 0, row-1);
 
 
-
-				    char newFile[strlen(name) + strlen(type) + 9];//name-sorted-type+null
-				    for (int z = 0; z < (strlen(name) - 4); z++) {
-				    	newFile[z] = name[z];
-				    }
-				    newFile[strlen(name) - 4] = '-';
-				    newFile[strlen(name) - 3] = 's';
-				    newFile[strlen(name) - 2] = 'o';
-				    newFile[strlen(name) - 1] = 'r';
-				    newFile[strlen(name)] = 't';
-				    newFile[strlen(name) + 1] = 'e';
-				    newFile[strlen(name) + 2] = 'd';
-				    newFile[strlen(name) + 3] = '-';
-				    for (int blah = 0; blah < strlen(type); blah++) {
-				    	newFile[strlen(name)+4+blah] = type[blah];
-				    }
-				    newFile[strlen(name) + strlen(type) + 4] = '.';
-				    newFile[strlen(name) + strlen(type) + 5] = 'c';
-				    newFile[strlen(name) + strlen(type) + 6] = 's';
-				    newFile[strlen(name) + strlen(type) + 7] = 'v';
-				    newFile[strlen(name) + strlen(type) + 8] = '\0';
+				    char newFile[1024];
+				    if (strcmp(pathName, "") == 0) {
+					    for (int z = 0; z < (strlen(name) - 4); z++) {
+					    	newFile[z] = name[z];
+					    }
+					    newFile[strlen(name) - 4] = '-';
+					    newFile[strlen(name) - 3] = 's';
+					    newFile[strlen(name) - 2] = 'o';
+					    newFile[strlen(name) - 1] = 'r';
+					    newFile[strlen(name)] = 't';
+					    newFile[strlen(name) + 1] = 'e';
+					    newFile[strlen(name) + 2] = 'd';
+					    newFile[strlen(name) + 3] = '-';
+					    for (int blah = 0; blah < strlen(type); blah++) {
+					    	newFile[strlen(name)+4+blah] = type[blah];
+					    }
+					    newFile[strlen(name) + strlen(type) + 4] = '.';
+					    newFile[strlen(name) + strlen(type) + 5] = 'c';
+					    newFile[strlen(name) + strlen(type) + 6] = 's';
+					    newFile[strlen(name) + strlen(type) + 7] = 'v';
+					    newFile[strlen(name) + strlen(type) + 8] = '\0';
+					}
+					else {
+						for (int z = 0; z < strlen(pathName); z++) {
+							newFile[z] = pathName[z];
+						}
+						for (int g = 0; g < strlen(fileName) - 4; g++) {
+							newFile[g + strlen(pathName)] = fileName[g];
+						}
+						newFile[strlen(fileName) + strlen(pathName)- 4] = '-';
+					    newFile[strlen(fileName) + strlen(pathName)- 3] = 's';
+					    newFile[strlen(fileName) + strlen(pathName)- 2] = 'o';
+					    newFile[strlen(fileName) + strlen(pathName)- 1] = 'r';
+					    newFile[strlen(fileName)+ strlen(pathName)] = 't';
+					    newFile[strlen(fileName) + strlen(pathName)+ 1] = 'e';
+					    newFile[strlen(fileName) + strlen(pathName)+ 2] = 'd';
+					    newFile[strlen(fileName) + strlen(pathName)+ 3] = '-';
+					    for (int blah = 0; blah < strlen(type); blah++) {
+					    	newFile[strlen(fileName)+4+blah + strlen(pathName)] = type[blah];
+					    }
+					    newFile[strlen(fileName) + strlen(type) + strlen(pathName) + 4] = '.';
+					    newFile[strlen(fileName) + strlen(type) + strlen(pathName)+ 5] = 'c';
+					    newFile[strlen(fileName) + strlen(type) + strlen(pathName)+ 6] = 's';
+					    newFile[strlen(fileName) + strlen(type) + strlen(pathName)+ 7] = 'v';
+					    newFile[strlen(fileName) + strlen(type) + strlen(pathName)+ 8] = '\0';
+					}
 
 				    //prints to a new file
 				    FILE *sorted;
@@ -281,7 +306,7 @@ void recurse (const char* name, char* type) {
         			return;
         		}
         		if (pid > 0) {
-        			printf("%d\n", pid);
+        			printf("%d,", pid);
         		}		
         	}
         	else {
@@ -303,11 +328,11 @@ void recurse (const char* name, char* type) {
 	        counter++;
 	        if (pid == 0) {
 	            snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
-	            recurse(path, type);
+	            recurse(path, type, pathName, entry->d_name);
 	            return;
 	        }
 	        if (pid > 0) {
-	        	printf("%d\n", pid);
+	        	
 	        }	
         }
 	}
@@ -318,6 +343,6 @@ void recurse (const char* name, char* type) {
 }
 
 int main (int argc, char** argv) {
-	recurse("/Users/kyleshin/Desktop/sorter", "movie_title");
+	recurse("/Users/kyleshin/Desktop/sorter/testdirect", "movie_title", "/Users/kyleshin/Desktop/sorter/", "a");
 	return 0;
 }
