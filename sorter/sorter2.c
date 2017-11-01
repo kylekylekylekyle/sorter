@@ -42,7 +42,6 @@ int notSorted(const char* name, char * type) {//0 sorted 1 not sorted
 		char sorted[9] = "-sorted-";
 		for (int i = 0; i < 8; i++) {
 			if (sorted[i] != name[length - 12 + i - length2]) {
-				printf("Compare: %c\n%c\n", sorted[i], name[length - 12 + i - length2]);
 				return 1;
 			}
 		}
