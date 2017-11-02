@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
+#include <sys/mman.h>
 #include <dirent.h>
 #include <errno.h>
 #include <sys/wait.h>
@@ -10,7 +11,7 @@
 
 #define LINE_SIZE 1024
 
-int status;
+void * ptr;
 
 int isCSV(const char* name) {//0 not csv 1 csv
 	int length = strlen(name);
@@ -52,15 +53,19 @@ int notSorted(const char* name, char * type) {//0 sorted 1 not sorted
 }
 
 void recurse (const char* name, char* type, char* pathName, char* fileName) {
-	int counter = 0;
 	pid_t pid;
 	DIR * dir;
+	int * ptr2;
 	if ((dir = opendir(name)) == NULL) {
         if (isCSV(name) == 1) {
         	if (notSorted(name, type) == 1){
         		pid = fork();
-        		counter++;
+        		wait(NULL);
         		if (pid == 0) {
+        			ptr2 = ptr;
+        			*ptr2 += 1;
+        			memcpy(ptr, ptr2, sizeof(int));
+        	
         			FILE *unsorted;
 					unsorted = fopen(name, "r");
 					size_t linesize = 40;
@@ -303,7 +308,7 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
 				    fclose(sorted);
 				    fclose(unsorted);
 				    free(myinfo);
-        			return;
+        			exit(0);
         		}
         		if (pid > 0) {
         			fflush(0);
@@ -312,11 +317,11 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
         		}		
         	}
         	else {
-        		return;
+        		exit(0);
         	}
         }
         else {
-        	return;
+        	exit(0);
         }
 	}
 	else {
@@ -327,11 +332,14 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
 	            continue;
 	        }
 	        pid = fork();
-	        counter++;
+    		wait(NULL);
 	        if (pid == 0) {
+	       		ptr2 = ptr;
+        		*ptr2 += 1;
+	     		memcpy(ptr, ptr2, sizeof(int));
 	            snprintf(path, sizeof(path), "%s/%s", name, entry->d_name);
 	            recurse(path, type, pathName, entry->d_name);
-	            return;
+	            exit(0);
 	        }
 	        if (pid > 0) {
 	        	fflush(0);
@@ -340,13 +348,12 @@ void recurse (const char* name, char* type, char* pathName, char* fileName) {
 	        }	
         }
 	}
-	for (int count = 0; count <= counter; count++) {
-    	wait(NULL);
-    }
+	
     closedir(dir);
 }
 
 int main (int argc, char** argv) {
+	ptr = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
 	char * pathName;
 	char * name;
 	char * type;
@@ -411,14 +418,13 @@ int main (int argc, char** argv) {
 		}
 	}
 	fflush(0);
-	printf("%s\n", pathName);
+	printf("Initial PID: %d\n", getpid());
 	fflush(0);
-	//printf("Initial PID: %d\n", getPid());
-	fflush(0);
-	printf("PIDs of all child processes: ");
+	printf("PIDs of All Child Processes: ");
 	fflush(0);
 	recurse(name, type, pathName, "a");
-	//recurse("/Users/kyleshin/Desktop/sorter/testdirect", "movie_title", "/Users/kyleshin/Desktop/sorter/", "a");
-	fflush(0);
+	int * ptr2 = ptr;
+	printf("\nTotal Number of Processes: %d\n", ++*ptr2);
+
 	return 0;
 }
